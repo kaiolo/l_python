@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>仙逆人物志 - 修真界档案系统</title>
+  <style>
+    /* 重置默认样式 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Microsoft YaHei', Arial, sans-serif;
+      background: linear-gradient(135deg, #87bddc, #a4c3e8, #c9e0f5, #a4c3e8);
+      color: #333;
+      min-height: 100vh;
+    }
+
+    /* 顶部导航栏样式 */
+    .top-nav {
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      height: 80px;
+      width: 100%;
+      position: static;
+      z-index: 100;
+    }
+
+    /* 加粗加大标题样式 */
+    .title {
+      font-size: 30px;
+      font-weight: bold;
+      color: #ffd700;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      letter-spacing: 1px;
+    }
+
+    /* 轮播图容器样式 */
+    .slider-container {
+      width: 100%;
+      height: 400px;
+      margin: 20px auto;
+      padding: 0 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* 轮播图样式 */
+    .slider {
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .slide.active {
+      opacity: 1;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* 轮播图指示器 */
+    .slider-indicators {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+    }
+
+    .indicator {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      margin: 0 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .indicator.active {
+      background: white;
+    }
+
+    /* 轮播图控制按钮 */
+    .slider-controls {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      height: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transform: translateY(-50%);
+      z-index: 10;
+    }
+
+    .control-btn {
+      background: rgba(255, 255, 255, 0.3);
+      color: white;
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: background 0.3s ease;
+      backdrop-filter: blur(5px);
+    }
+
+    .control-btn:hover {
+      background: rgba(255, 255, 255, 0.5);
+    }
+
+    /* 表格样式 */
+    .table-container {
+      margin: 30px auto;
+      width: 100%;
+      padding: 0 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 15px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    th, td {
+      padding: 15px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background: linear-gradient(to bottom, #1a2a6c, #2c3e8f);
+      color: white;
+      font-weight: bold;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+      position: sticky;
+      top: 0;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f8f9fa;
+    }
+
+    tr:hover {
+      background-color: #e3f2fd;
+      transform: scale(1.01);
+      transition: all 0.3s ease;
+    }
+
+
+    img {
+      width: 30px;
+      height: 30px;
+      object-fit: cover;
+      border-radius: 8px;
+      transition: transform 0.3s ease;
+    }
+
+    img:hover {
+      transform: scale(1.2);
+      box-shadow: 0 0 15px rgba(26, 42, 108, 0.7);
+    }
+
+    .footer {
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(5px);
+      color: #fff;
+      text-align: center;
+      padding: 25px 0;
+      margin-top: 40px;
+      width: 100%;
+    }
+
+    .content {
+      width: 100%;
+      margin: 0 auto;
+      padding-top: 0px;
+    }
+
+    /* 添加一些动画效果 */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .table-container {
+      animation: fadeIn 0.8s ease-out;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="content">
+    <!-- 顶部导航栏 -->
+    <nav class="top-nav">
+      <h1 class="title">仙逆人物志 - 修真界档案系统</h1>
+    </nav>
+
+    <!-- 轮播图展示区 -->
+    <div class="slider-container">
+      <div class="slider" id="slider">
+        <div class="slide active">
+          <img src="./img/1.jpg" alt="仙逆图片1">
+        </div>
+        <div class="slide">
+          <img src="./img/2.jpg" alt="仙逆图片2">
+        </div>
+        <div class="slide">
+          <img src="./img/3.jpg" alt="仙逆图片3">
+        </div>
+        <div class="slide">
+          <img src="./img/4.jpg" alt="仙逆图片4">
+        </div>
+        <div class="slide">
+          <img src="./img/5.jpg" alt="仙逆图片5">
+        </div>
+        <div class="slide">
+          <img src="./img/6.jpg" alt="仙逆图片6">
+        </div>
+        <div class="slide">
+          <img src="./img/7.jpg" alt="仙逆图片7">
+        </div>
+        <div class="slide">
+          <img src="./img/8.jpg" alt="仙逆图片8">
+        </div>
+        
+        <div class="slider-controls">
+          <button class="control-btn" id="prevBtn">&#10094;</button>
+          <button class="control-btn" id="nextBtn">&#10095;</button>
+        </div>
+        
+        <div class="slider-indicators" id="indicators">
+          <span class="indicator active" data-slide="0"></span>
+          <span class="indicator" data-slide="1"></span>
+          <span class="indicator" data-slide="2"></span>
+          <span class="indicator" data-slide="3"></span>
+          <span class="indicator" data-slide="4"></span>
+          <span class="indicator" data-slide="5"></span>
+          <span class="indicator" data-slide="6"></span>
+          <span class="indicator" data-slide="7"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 表格展示区 -->
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>头像</th>
+            <th>修为</th>
+            <th>技能</th>
+            <th>身份地位</th>
+            <th>师承</th>
+            <th>法宝</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>王林</td>
+            <td>男</td>
+            <td><img src="https://ai-web-2025.oss-cn-beijing.aliyuncs.com/1.png" alt="王林"></td>
+            <td>婴变期</td>
+            <td>罗天传承、三式神通</td>
+            <td>天逆弟子</td>
+            <td>罗天、天运子</td>
+            <td>天劫剑、朱雀印</td>
+          </tr>
+          <tr>
+            <td>李慕婉</td>
+            <td>女</td>
+            <td><img src="https://ai-web-2025.oss-cn-beijing.aliyuncs.com/1.png" alt="李慕婉"></td>
+            <td>元婴期</td>
+            <td>冰系神通、寒气凝霜</td>
+            <td>天逆宗长老</td>
+            <td>家族传承</td>
+            <td>寒冰玉镯、雪蚕丝袍</td>
+          </tr>
+          <tr>
+            <td>王卓</td>
+            <td>男</td>
+            <td><img src="https://ai-web-2025.oss-cn-beijing.aliyuncs.com/1.png" alt="王卓"></td>
+            <td>金丹期</td>
+            <td>剑修之道、御剑术</td>
+            <td>天逆宗弟子</td>
+            <td>天逆宗</td>
+            <td>青锋剑、金鳞甲</td>
+          </tr>
+          <tr>
+            <td>柳眉</td>
+            <td>女</td>
+            <td><img src="https://ai-web-2025.oss-cn-beijing.aliyuncs.com/1.png" alt="柳眉"></td>
+            <td>筑基后期</td>
+            <td>幻境迷心、魅惑之术</td>
+            <td>云天宗弟子</td>
+            <td>云天宗</td>
+            <td>迷魂幡、幻影纱</td>
+          </tr>
+          <tr>
+            <td>张虎</td>
+            <td>男</td>
+            <td><img src="https://ai-web-2025.oss-cn-beijing.aliyuncs.com/1.png" alt="张虎"></td>
+            <td>结丹期</td>
+            <td>大力神功、金刚不坏</td>
+            <td>天逆宗弟子</td>
+            <td>天逆宗</td>
+            <td>虎头战戟、玄铁护心镜</td>
+          </tr>
+          <tr>
+            <td>木冰眉</td>
+            <td>女</td>
+            <td><img src="https://ai-web-2025.oss-cn-beijing.aliyuncs.com/1.png" alt="木冰眉"></td>
+            <td>化神期</td>
+            <td>冰封万里、玄冰掌</td>
+            <td>雨之仙域修士</td>
+            <td>雨之仙域传承</td>
+            <td>玄冰扇、冰晶戒</td>
+          </tr>
+          <tr>
+            <td>司徒南</td>
+            <td>男</td>
+            <td><img src="https://ai-web-2025.oss-cn-beijing.aliyuncs.com/1.png" alt="司徒南"></td>
+            <td>化神后期</td>
+            <td>南宫剑诀、遁甲术</td>
+            <td>南宫世家家主</td>
+            <td>南宫世家传承</td>
+            <td>南宫剑、遁甲符</td>
+          </tr>
+          <tr>
+            <td>天运子</td>
+            <td>男</td>
+            <td><img src="https://ai-web-2025.oss-cn-beijing.aliyuncs.com/1.png" alt="天运子"></td>
+            <td>问鼎中期</td>
+            <td>天运神通、推演之术</td>
+            <td>天运宗宗主</td>
+            <td>自创天运之道</td>
+            <td>天运珠、问鼎印</td>
+          </tr>
+          <tr>
+            <td>云雀子</td>
+            <td>男</td>
+            <td><img src="https://ai-web-2025.oss-cn-beijing.aliyuncs.com/1.png" alt="云雀子"></td>
+            <td>问鼎后期</td>
+            <td>雀羽飞剑、风雷遁</td>
+            <td>踏天峰传人</td>
+            <td>踏天峰传承</td>
+            <td>云雀剑、风雷翼</td>
+          </tr>
+          <tr>
+            <td>罗天星</td>
+            <td>男</td>
+            <td><img src="https://ai-web-2025.oss-cn-beijing.aliyuncs.com/1.png" alt="罗天星"></td>
+            <td>婴变前期</td>
+            <td>星辰之力、星移斗转</td>
+            <td>罗天星域守护者</td>
+            <td>星辰古神传承</td>
+            <td>星河图、星辰链</td>
+          </tr>
+          <tr>
+            <td>藤化元</td>
+            <td>男</td>
+            <td><img src="https://ai-web-2025.oss-cn-beijing.aliyuncs.com/1.png" alt="藤化元"></td>
+            <td>元婴大圆满</td>
+            <td>藤蔓束缚、化神之术</td>
+            <td>藤家老祖</td>
+            <td>藤家传承</td>
+            <td>化神藤鞭、元婴护盾</td>
+          </tr>
+          <tr>
+            <td>孙泰</td>
+            <td>男</td>
+            <td><img src="https://ai-web-2025.oss-cn-beijing.aliyuncs.com/1.png" alt="孙泰"></td>
+            <td>筑基后期</td>
+            <td>沙土遁术、黄沙漫天</td>
+            <td>沙家族长</td>
+            <td>沙家传承</td>
+            <td>黄沙印、遁地符</td>
+          </tr>
+          <tr>
+            <td>墨智</td>
+            <td>男</td>
+            <td><img src="https://ai-web-2025.oss-cn-beijing.aliyuncs.com/1.png" alt="墨智"></td>
+            <td>化神初期</td>
+            <td>悟道意境、墨染虚空</td>
+            <td>神秘强者</td>
+            <td>自创意境之道</td>
+            <td>悟道笔、意境画卷</td>
+          </tr>
+          <tr>
+            <td>十三</td>
+            <td>男</td>
+            <td><img src="https://ai-web-2025.oss-cn-beijing.aliyuncs.com/1.png" alt="十三"></td>
+            <td>筑基初期</td>
+            <td>隐匿追踪、暗杀之术</td>
+            <td>神秘杀手</td>
+            <td>未知</td>
+            <td>暗影匕首、隐身符</td>
+          </tr>
+          <tr>
+            <td>莫厉海</td>
+            <td>男</td>
+            <td><img src="https://ai-web-2025.oss-cn-beijing.aliyuncs.com/1.png" alt="莫厉海"></td>
+            <td>元婴初期</td>
+            <td>烈焰神通、火海无边</td>
+            <td>火焚国国主</td>
+            <td>火焚国传承</td>
+            <td>烈焰刀、火灵珠</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <!-- 页脚的版权区域 -->
+    <footer class="footer">
+      <div class="container">
+        <p>© 2026 仙逆人物志 - <span>修真界档案系统</span></p>
+        <p>探索修真世界的奥秘，记录修仙路上的传奇</p>
+      </div>
+    </footer>
+
+  </div>
+  
+  <!-- 页面底部的JavaScript代码 -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const slider = document.getElementById('slider');
+      const slides = document.querySelectorAll('.slide');
+      const indicators = document.querySelectorAll('.indicator');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      
+      let currentIndex = 0;
+      let slideInterval;
+      const slideDuration = 5000; // 自动切换间隔时间（毫秒）
+      
+      // 初始化轮播图
+      function initSlider() {
+        resetTimer();
+        
+        // 点击下一个按钮事件
+        nextBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          goToSlide(currentIndex + 1);
+        });
+        
+        // 点击上一个按钮事件
+        prevBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          goToSlide(currentIndex - 1);
+        });
+        
+        // 点击指示器事件
+        indicators.forEach((indicator, index) => {
+          indicator.addEventListener('click', () => {
+            goToSlide(index);
+          });
+        });
+        
+        // 开始自动播放
+        startAutoSlide();
+        
+        // 鼠标悬停时暂停，离开时继续
+        slider.addEventListener('mouseenter', pauseAutoSlide);
+        slider.addEventListener('mouseleave', startAutoSlide);
+      }
+      
+      // 切换到指定幻灯片
+      function goToSlide(n) {
+        slides[currentIndex].classList.remove('active');
+        indicators[currentIndex].classList.remove('active');
+        
+        if (n >= slides.length) {
+          currentIndex = 0;
+        } else if (n < 0) {
+          currentIndex = slides.length - 1;
+        } else {
+          currentIndex = n;
+        }
+        
+        slides[currentIndex].classList.add('active');
+        indicators[currentIndex].classList.add('active');
+        
+        resetTimer();
+      }
+      
+      // 下一张
+      function nextSlide() {
+        goToSlide(currentIndex + 1);
+      }
+      
+      // 上一张
+      function prevSlide() {
+        goToSlide(currentIndex - 1);
+      }
+      
+      // 开始自动播放
+      function startAutoSlide() {
+        slideInterval = setInterval(nextSlide, slideDuration);
+      }
+      
+      // 暂停自动播放
+      function pauseAutoSlide() {
+        clearInterval(slideInterval);
+      }
+      
+      // 重置计时器
+      function resetTimer() {
+        pauseAutoSlide();
+        startAutoSlide();
+      }
+      
+      // 初始化轮播图
+      initSlider();
+    });
+  </script>
+</body>
+</html>

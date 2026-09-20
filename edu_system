@@ -1,0 +1,125 @@
+class student ():
+    def __init__(self,name,chinese,math,english):
+        self.name   =name
+        self.chinese=chinese
+        self.math   =math
+        self.english=english
+    def update_grade(self,chinese,math,english):
+        self.chinese=chinese
+        self.math   =math
+        self.english=english
+    def show(self):
+        print(f"学生{self.name} : 语文{self.chinese}|数学{self.math}|英语{self.english}")
+
+def match_name (name,stu_list):
+    for s in stu_list :
+        if s.name==name :
+            return True
+    return False
+
+
+def it_is_you (name,stu_list):
+    mask=[stu_list.index(i) for i in stu_list if match_name(name,stu_list)==True]
+    return stu_list[mask[0]]
+
+
+class education_sysytem():
+    Version=1.00
+    Athor  ="WenKai"
+    def __init__(self):
+        self.stu_list=[]
+    def add (self):
+        name=input("请输入学生姓名：")
+        if match_name(name , self.stu_list) :
+            print (f"{name}已经存在，请检查输入")
+            return 
+        try :
+            chinese=round(float(input ("请输入学生的语文成绩：")),1)
+            math   =round(float(input ("请输入学生的数学成绩：")),1)
+            english=round(float(input ("请输入学生的英语成绩：")),1)
+        except Exception:
+            print ("别捣乱！！！")
+            return
+
+        name=student(name ,chinese , math , english)
+        self.stu_list.append(name)
+        print(f"学生{name.name}添加成功")
+        name.show()
+    
+   
+    def update(self):
+        name=input("请输入学生姓名：")
+        if not match_name(name ,self.stu_list) :
+            print("未查询到学生，请重新输入")
+            return
+        try :
+            chinese=round(float(input ("请输入学生新的语文成绩：")),1)
+            math   =round(float(input ("请输入学生新的数学成绩：")),1)
+            english=round(float(input ("请输入学生新的英语成绩：")),1)
+        except Exception:
+            print ("别捣乱！！！")
+            return
+        instance=it_is_you(name,self.stu_list)
+        instance.update_grade(chinese , math, english)
+        print ("成绩修改成功")
+        instance.show()
+
+    def delete (self):
+        name=input("请输入学生姓名：")
+        if not match_name(name ,self.stu_list) :
+            print("未查询到学生，请重新输入")
+            return
+        instance=it_is_you(name,self.stu_list)
+        self.stu_list.remove(instance) 
+        print ("成功删除！！")
+    
+    def query (self):
+        name=input("请输入学生姓名：")
+        if not match_name(name ,self.stu_list) :
+            print("未查询到学生，请重新输入")
+            return
+        instance=it_is_you(name,self.stu_list)
+        instance.show()
+
+    def display_all (self):   
+        for s in self.stu_list :
+            s.show()
+    
+if __name__ == "__main__" :
+    edu=education_sysytem()
+    print(f"欢迎使用教育系统{edu.Version} 作者{edu.Athor}")
+    while True :
+        print ("###########################")
+        print ("######1：添加学生成绩######")
+        print ("######2：修改学生成绩######")
+        print ("######3：删除学生成绩######")
+        print ("######4：查询学生成绩######")
+        print ("######5：展示所有成绩######")
+        print ("######6：退出教育系统######")
+        print ("###########################")
+
+        oper=input("请输入指令")
+        
+        match oper :
+            case '1' :
+                edu.add()
+            case '2' :
+                edu.update()
+            case '3' :
+                edu.delete()
+            case '4' :
+                edu.query()
+            case '5' :
+                edu.display_all()
+            case '6' :
+                print ("Bye~")
+                break
+            case _ :
+                print ("只能输入1-6的数字哟")
+
+
+
+
+
+
+

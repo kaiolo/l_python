@@ -1,0 +1,24 @@
+# Python 缓存
+__pycache__/
+*.py[cod]
+*.pyo
+*$py.class
+
+# Conda / 虚拟环境
+.conda/
+venv/
+.venv/
+
+# 数据集 / 大文件
+data/
+california_data/
+
+# 编译产物
+*.exe
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 编辑器
+.idea/
