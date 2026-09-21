@@ -15,7 +15,7 @@ def  get_movie_info(movie_doc):
     movie_type  =movie_doc.xpath('//*[@id="original_header"]/div[2]/section/div[1]/div/span[3]/a/text()')
     movie_lang  =movie_doc.xpath('//*[@id="media_v4"]/div/div/div[2]/div/section/div[1]/div/section[1]/p[3]/text()')
     movie_intro =movie_doc.xpath('//*[@id="original_header"]/div[2]/section/div[3]/div/p/text()')
-    movie_len   =movie_doc.xpath('//*[@id="original_header"]/div[2]/section/div[1]/div/span[4]/text()')
+    movie_len   =movie_doc.xpath('//*[@id="original_header"]/div[2]/section/div[1]/div/span[@class="runtime"]/text()')
     print(f"正在导入{movie_name[0].strip()}的信息")
     movie_info={"movie_name"  :movie_name[0].strip()   if movie_name   else " ",
                 "movie_data"  :re.match(r"\d{4}-\d{2}-\d{2}",movie_data[0].strip()).group()   if movie_data   else " ",
@@ -47,35 +47,37 @@ def parse_hm(text: str):
     # 查找m前面的数字
     m_match = re.search(r'(\d+)m', text)
 
-    hour = int(h_match.group(1)) if h_match else 0
+    hour   = int(h_match.group(1)) if h_match else 0
     minute = int(m_match.group(1)) if m_match else 0
     len    =  60*hour + minute
     return len
 
-num_page = 1
-all_movie_list=[]   
 
-for num in range(num_page):
-    if num == 0 :
-        response=requests.get(TMDB_MOVIE_URL)
-    else: response=requests.post('https://www.themoviedb.org/discover/movie/items',
-                       data=f"air_date.gte=&air_date.lte=&certification=&certification_country=CN&debug=&first_air_date.gte=&first_air_date.lte=&include_adult=false&include_softcore=false&latest_ceremony.gte=&latest_ceremony.lte=&page={num+1}&primary_release_date.gte=&primary_release_date.lte=&region=&release_date.gte=&release_date.lte=2027-03-13&show_me=everything&sort_by=vote_average.desc&vote_average.gte=0&vote_average.lte=10&vote_count.gte=300&watch_region=CN&with_genres=&with_keywords=&with_networks=&with_origin_country=&with_original_language=&with_watch_monetization_types=&with_watch_providers=&with_release_type=&with_runtime.gte=0&with_runtime.lte=400")
-    movie_doc= html.fromstring(response.text)
+if __name__ == "__main__" :
+    num_page = 15
+    all_movie_list=[]   
+
+    for num in range(num_page):
+        if num == 0 :
+            response=requests.get(TMDB_MOVIE_URL)
+        else: response=requests.post('https://www.themoviedb.org/discover/movie/items',
+                        data=f"air_date.gte=&air_date.lte=&certification=&certification_country=CN&debug=&first_air_date.gte=&first_air_date.lte=&include_adult=false&include_softcore=false&latest_ceremony.gte=&latest_ceremony.lte=&page={num+1}&primary_release_date.gte=&primary_release_date.lte=&region=&release_date.gte=&release_date.lte=2027-03-13&show_me=everything&sort_by=vote_average.desc&vote_average.gte=0&vote_average.lte=10&vote_count.gte=300&watch_region=CN&with_genres=&with_keywords=&with_networks=&with_origin_country=&with_original_language=&with_watch_monetization_types=&with_watch_providers=&with_release_type=&with_runtime.gte=0&with_runtime.lte=400")
+        movie_doc= html.fromstring(response.text)
 
 
-    movie_list=movie_doc.xpath('//*[@class="media-list-results contents"]/div')
+        movie_list=movie_doc.xpath('//*[@class="media-list-results contents"]/div')
 
-    for movie in movie_list :
-        movie_link=movie.xpath('.//a/@href')
-        movie_url=TMDB_URL+movie_link[0]
-        print(f"正在从{movie_url}获取电影信息")
-        movie_response=requests.get(movie_url)
-        movie_docs=html.fromstring(movie_response.text)
-        all_movie_list.append(get_movie_info(movie_docs))
-    print(f"第{num+1}页信息获取完毕")
-movie_csv="crawl/movie.csv"
-save_csv(all_movie_list)
-print("导入完毕！！")
+        for movie in movie_list :
+            movie_link=movie.xpath('.//a/@href')
+            movie_url=TMDB_URL+movie_link[0]
+            print(f"正在从{movie_url}获取电影信息")
+            movie_response=requests.get(movie_url)
+            movie_docs=html.fromstring(movie_response.text)
+            all_movie_list.append(get_movie_info(movie_docs))
+        print(f"第{num+1}页信息获取完毕")
+    movie_csv="crawl/movie.csv"
+    save_csv(all_movie_list)
+    print("导入完毕！！")
 
 
 
