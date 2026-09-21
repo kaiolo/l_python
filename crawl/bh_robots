@@ -10,27 +10,47 @@ TMDB_MOVIE_URL='https://www.themoviedb.org/movie/top-rated'
 
 def  get_movie_info(movie_doc):
     movie_name  =movie_doc.xpath('//*[@id="original_header"]/div[2]/section/div[1]/h2/a/text()')
-    movie_date  =movie_doc.xpath('//*[@id="original_header"]/div[2]/section/div[1]/div/span[2]/text()')
+    movie_data  =movie_doc.xpath('//*[@id="original_header"]/div[2]/section/div[1]/div/span[2]/text()')
     movie_scores=movie_doc.xpath('//*[@id="consensus_pill"]/div/div[1]/div/div/@data-percent')
     movie_type  =movie_doc.xpath('//*[@id="original_header"]/div[2]/section/div[1]/div/span[3]/a/text()')
     movie_lang  =movie_doc.xpath('//*[@id="media_v4"]/div/div/div[2]/div/section/div[1]/div/section[1]/p[3]/text()')
     movie_intro =movie_doc.xpath('//*[@id="original_header"]/div[2]/section/div[3]/div/p/text()')
+    movie_len   =movie_doc.xpath('//*[@id="original_header"]/div[2]/section/div[1]/div/span[4]/text()')
     print(f"正在导入{movie_name[0].strip()}的信息")
     movie_info={"movie_name"  :movie_name[0].strip()   if movie_name   else " ",
-                "movie_date"  :re.match(r"\d{4}-\d{2}-\d{2}",movie_date[0].strip()).group()   if movie_date   else " ",
+                "movie_data"  :re.match(r"\d{4}-\d{2}-\d{2}",movie_data[0].strip()).group()   if movie_data   else " ",
                 "movie_scores":movie_scores[0].strip() if movie_scores else " ",
                 "movie_type"  :",".join(movie_type)    if movie_type   else " ",              
                 "movie_lang"  :movie_lang[0].strip()   if movie_lang   else " ",
-                "movie_intro" :movie_intro[0].strip()  if movie_intro  else " "
+                "movie_intro" :movie_intro[0].strip()  if movie_intro  else " ",
+                "movie_len"   :parse_hm(movie_len[0])  if movie_intro  else " "
                 }
     return movie_info
 
 def save_csv(all_movie_list):
     with open (movie_csv,"w",encoding="utf-8",newline="") as f:
-        writer=csv.DictWriter(f , fieldnames=['movie_name','movie_date','movie_scores',
-                                            'movie_type','movie_lang','movie_intro' ])
+        writer=csv.DictWriter(f , fieldnames=['movie_name','movie_data','movie_scores',
+                                            'movie_type','movie_lang','movie_intro','movie_len' ])
         writer.writeheader()
         writer.writerows(all_movie_list)
+
+
+def parse_hm(text: str):
+    """
+    解析字符串中的小时(h)和分钟(m)数字
+    支持格式："1h 31m", "*5h*", "*8m*", "2h", "30m"
+    :param text: 待解析字符串
+    :return: (hour, minute)，无对应数字返回 None
+    """
+    # 查找h前面的数字
+    h_match = re.search(r'(\d+)h', text)
+    # 查找m前面的数字
+    m_match = re.search(r'(\d+)m', text)
+
+    hour = int(h_match.group(1)) if h_match else 0
+    minute = int(m_match.group(1)) if m_match else 0
+    len    =  60*hour + minute
+    return len
 
 num_page = 1
 all_movie_list=[]   
