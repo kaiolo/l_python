@@ -1,7 +1,7 @@
 import pandas as pd 
 import re
-movie_data  = pd.read_csv("crawl/movie_original.csv" , usecols=["movie_name" , "movie_data" , "movie_scores" , "movie_lang" ,"movie_len"] , nrows= None)
-
+movie_data  = pd.read_csv("crawl/movie_original.csv" , usecols=["movie_name" , "movie_data" , "movie_scores" , "movie_lang" ,"movie_len" , "movie_type"] , nrows= None)
+pd.set_option('display.max_rows',100)
 
 """
 评分检查
@@ -28,6 +28,13 @@ movie_data.loc[mask , "movie_lang"]="unkonwn"
 """
 mask = movie_data["movie_len"].apply(lambda x : isinstance (x , int))
 assert mask.all()
+
+
+"""
+类型检查
+"""
+idx= movie_data["movie_type"]==" "
+movie_data.loc[idx , "movie_type"]="未知"
 
 
 movie_data.to_csv("crawl/movie_processed.csv")
