@@ -1,6 +1,6 @@
 import torch
 from torch import nn
-from self_site_package import Accumulator
+from .d2l_self_Accumulator import Accumulator
 
 
 def argmax (x , axis):
