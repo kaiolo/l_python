@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>汉字谜盒</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪄</text></svg>" type="image/svg+xml">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 左侧控制面板 -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>🪄 汉字谜盒控制台</h2>
+            </div>
+
+            <!-- 分割线 -->
+            <hr class="divider">
+
+            <!-- 新建会话按钮 -->
+            <button class="btn btn-primary btn-full" id="newSessionBtn">
+                <span>✏️</span> 新建游戏
+            </button>
+
+
+
+            <!-- 会话历史 -->
+            <div class="session-section">
+                <h3>游戏记录</h3>
+                <div class="session-list" id="sessionList">
+                    <!-- 会话列表将动态生成 -->
+                </div>
+            </div>
+        </aside>
+        
+        <!-- 中间交互消息区域 -->
+        <main class="chat-container">
+            <!-- 标题栏 -->
+            <header class="chat-header">
+                <div class="header-left">
+                    <h1>🪄 汉字谜盒</h1>
+                    <span class="session-name" id="sessionName">会话名称: </span>
+                </div>
+                <div class="theme-switcher">
+                    <button class="btn btn-theme" id="themeBtn" title="切换背景色">
+                        <span>🎨</span>
+                    </button>
+                    <div class="theme-dropdown" id="themeDropdown">
+                        <div class="theme-option" data-theme="light">
+                            <span class="theme-color theme-light"></span>
+                            <span>白色</span>
+                        </div>
+                        <div class="theme-option" data-theme="dark">
+                            <span class="theme-color theme-dark"></span>
+                            <span>暗黑</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- 聊天消息区域 -->
+            <div class="chat-messages" id="chatMessages">
+                <!-- 消息将动态生成 -->
+            </div>
+            
+            <!-- 输入区域 -->
+            <div class="chat-input-container">
+                <div class="chat-input-wrapper">
+                    <input type="text" 
+                           class="chat-input" 
+                           id="chatInput" 
+                           placeholder="输入你的答案，或者问我要新题目~"
+                           autocomplete="off">
+                    <button class="btn btn-send" id="sendBtn">
+                        <span>➤</span>
+                    </button>
+                </div>
+            </div>
+        </main>
+        
+        <!-- 右侧游戏简介栏 -->
+        <aside class="info-sidebar">
+            <div class="info-header">
+                <h2>🪄 游戏简介</h2>
+            </div>
+            
+            <div class="info-content">
+                <div class="info-section">
+                    <p><strong>汉字谜盒 是一款基于人工智能的字谜互动游戏，专为汉字爱好者设计。在这里，你将与AI机器人进行有趣的猜字挑战！</strong></p>
+                </div>
+                
+                <div class="info-section">
+                    <h3>🎮 核心玩法</h3>
+                    <p>AI会随机出一道经典字谜（如"一口咬掉牛尾巴"），你需要根据谜面提示猜出对应的汉字，AI会根据你的回答给出相应的提示，并给出最终的答案。</p>
+                </div>
+                
+                <div class="info-section">
+                    <h3>✨ 特色功能</h3>
+                    <ul class="feature-list">
+                        <li><strong>智能判题：</strong>AI精准判断你的答案是否正确，答对即获即时夸奖</li>
+                        <li><strong>贴心提示：</strong>猜错时提供线索引导，不会直接透露答案</li>
+                        <li><strong>无限挑战：</strong>每次出题完全随机，永不重复</li>
+                        <li><strong>会话记忆：</strong>游戏记录自动保存，随时回顾精彩对局</li>
+                    </ul>
+                </div>
+                
+                <div class="info-section">
+                    <h3>🎯 适合人群</h3>
+                    <ul class="audience-list">
+                        <li>汉字文化爱好者</li>
+                        <li>语文学习辅助工具</li>
+                        <li>课堂教学演示素材</li>
+                        <li>休闲娱乐解谜玩家</li>
+                    </ul>
+                </div>
+                
+                <div class="info-section footer-text">
+                    <p><strong>快来挑战你的汉字智慧，在轻松互动中感受汉字的无穷魅力！</strong></p>
+                </div>
+            </div>
+        </aside>
+    </div>
+    
+    <script src="/static/app.js"></script>
+</body>
+</html>
