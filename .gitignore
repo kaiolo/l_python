@@ -22,3 +22,5 @@ Thumbs.db
 
 # 编辑器
 .idea/
+
+./crawl/汉字谜盒/.env

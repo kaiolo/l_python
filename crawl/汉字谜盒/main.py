@@ -12,6 +12,11 @@ app.mount("/static", StaticFiles(directory="./crawl/汉字谜盒/static"), name=
 def root():
     return FileResponse("./crawl/汉字谜盒/static/index.html")
 
+
+@app.get("/api/sessions")
+def 
+
+
 if __name__ == '__main__':
     import uvicorn
     uvicorn.run(app,host="0.0.0.0",port=800)
