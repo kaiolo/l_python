@@ -8,6 +8,7 @@ __pycache__/
 .conda/
 venv/
 .venv/
+.env/
 
 # 数据集 / 大文件
 data/
@@ -23,4 +24,5 @@ Thumbs.db
 # 编辑器
 .idea/
 
-./crawl/汉字谜盒/.env
+#apikey
+crawl/汉字谜盒/.env
