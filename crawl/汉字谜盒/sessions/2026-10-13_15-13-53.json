@@ -1,0 +1,37 @@
+{
+  "current_session": "2026-10-13_15-13-53",
+  "messages": [
+    {
+      "role": "user",
+      "content": "你好"
+    },
+    {
+      "role": "assistant",
+      "content": "你好！欢迎来猜字谜。第一题：“八十八”（打一字）。"
+    },
+    {
+      "role": "user",
+      "content": "米"
+    },
+    {
+      "role": "assistant",
+      "content": "太棒了！就是“米”字！（八十八，从上到下正好组成“米”）。要不要再来一题？"
+    },
+    {
+      "role": "user",
+      "content": "再来"
+    },
+    {
+      "role": "assistant",
+      "content": "第二题：“门里有口”（打一字）。"
+    },
+    {
+      "role": "user",
+      "content": "问"
+    },
+    {
+      "role": "assistant",
+      "content": "太棒了！就是“问”字！要不要再来一题？"
+    }
+  ]
+}
