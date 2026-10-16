@@ -1,3 +1,4 @@
+#region
 def polite (msg):
     def inner (func):
             def wrapper (*arg,**kwarg):
@@ -18,7 +19,7 @@ def mult(a,b,*arg):
     for mutiplier in arg :
         result*= mutiplier
     return result
-
+#endregion
 # print(mult(3,4,5))
 
 class Polite :
