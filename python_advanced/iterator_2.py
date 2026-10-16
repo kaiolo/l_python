@@ -17,8 +17,8 @@ class Iterable :
         return len(self.arg)
 
 with open ('./python_advanced/what_you_show.txt' , 'r',encoding='utf-8' ) as f :
-    literal=f.read()
-
+    literal=f.readlines()[1]
+    
 iter1 = Iterable(*literal)
 
 for item in iter1:

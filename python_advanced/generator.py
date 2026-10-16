@@ -1,7 +1,7 @@
 import time
 
 with open ('./python_advanced/what_you_show.txt' , 'r',encoding='utf-8' ) as f :
-    literal=f.read()
+    literal=f.readlines()[2]
 
 
 def gen (*arg):

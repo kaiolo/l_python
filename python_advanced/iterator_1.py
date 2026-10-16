@@ -21,7 +21,7 @@ class Iterator :
         self.idx+=1
         return value
 with open ('./python_advanced/what_you_show.txt' , 'r',encoding='utf-8' ) as f :
-    literal=f.read()
+    literal=f.readlines()[0]
 
 iter1 = Iterable(*literal)
 
