@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-CN" id="html">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<title>登录_古文岛</title>
+<link href="/user/login.css?time=261026a" rel="stylesheet" type="text/css" />
+<script src="/js/Code.js" type="text/javascript"></script>
+<script src="/js/qrcode.min.js" type="text/javascript"></script>
+<script src="/user/login.js?time=261026a" type="text/javascript"></script>
+<link href="/css/skin.css?time=260921" rel="stylesheet" type="text/css" />
+<link href="/css/layui.css?time=260206" rel="stylesheet" type="text/css" />
+<link href="/css/play.css?time=260206" rel="stylesheet" type="text/css" />
+<script src="/js/jquery-3.2.1.min.js" type="text/javascript"></script>
+<script type="text/javascript">(function () {function getCookieValue(name) {var reg =new RegExp("(^| )" + name + "=([^;]*)(;|$)");var arr =document.cookie.match(reg);return arr ?unescape(arr[2]) :null;}
+window.getCookie =window.getCookie ||getCookieValue;window.setCookie =window.setCookie ||function (name,value) {var days =36500;var exp =new Date();exp.setTime(exp.getTime() + days *24 *60 *60 *1000);document.cookie =name + "=" + escape(value ||"") + ";expires=" + exp.toGMTString() + ";path=/;";};function hasLikeId(cookieName,id) {var value =getCookieValue(cookieName);return !!value &&("," + value + ",").indexOf("," + id + ",") !==-1;}
+function setLikeState(id,liked) {var img =document.getElementById("likeImg" + id);if (!img) {return;}
+ img.removeAttribute("onload");var target =liked ?"/img/tool/shou-cangok.png" :"/img/tool/shou-cang.png";if (img.getAttribute("src") !==target) {img.src =target;}
+img.alt =liked ?"已收藏" :"收藏";}
+window.selectLike =window.selectLike ||function (id) {setLikeState(id,hasLikeId("idsShiwen2017",id));};window.selectLikeMingju =window.selectLikeMingju ||function (id) {setLikeState(id,hasLikeId("idsMingju2017",id));};window.selectLikeAuthor =window.selectLikeAuthor ||function (id) {setLikeState(id,hasLikeId("idsAuthor2017",id));};window.selectLikeGuwen =window.selectLikeGuwen ||function (id) {setLikeState(id,hasLikeId("idsGuji2017",id));};})();</script>
+<script type="text/javascript">document.addEventListener('DOMContentLoaded',function () {var currentDomain =window.location.hostname;var _hmt =_hmt ||[];switch (currentDomain) {case "www.gushiwen.cn":loadGushiwenStat();break;default:loadGuwendaoStat();break;}
+});function loadGushiwenStat() {var hm =document.createElement("script");hm.src ="//hm.baidu.com/hm.js?9007fab6814e892d3020a64454da5a55";var s =document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm,s);}
+ function loadGuwendaoStat() {var hm =document.createElement("script");hm.src ="https://hm.baidu.com/hm.js?9811648d1409c4608cf19093200cee83";var s =document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm,s);}
+</script>
+</head>
+<body onclick="closeshowBos()">
+<div class="maintopbc" style="height:45px; background:url(https://oss.guwendao.net/siteimg/24jie/%E9%9C%9C%E9%99%8Dsmall.jpg) top center no-repeat; background-size:cover;">
+<div class="maintop" style="opacity:0.94;">
+<div class="cont">
+<div class="left">
+<a href="/">古文岛</a>
+</div>
+<div class="right">
+<div class="son1">
+<a style="margin-left:1px;" href="/">推荐</a>
+<a href="/shiwens/" style="">诗文</a>
+<a href="/mingjus/" style="">名句</a>
+<a href="/guwen/" style="">古籍</a>
+<a href="/authors/" style="">作者</a>
+<a href="/zici/" style="">字词</a>
+</div>
+<div class="son-right-group" style="display:flex; align-items:center; gap:8px;">
+<div class="son2">
+<div class="search" style="background-color:#F0EFE2;border: 1px solid #5D6146;" onclick="document.getElementById('txtKey').focus();">
+<form action="/search.aspx" onsubmit="return selectSearch()" contenttype="text/html; charset=utf-8">
+<input onkeydown="noajaxkeyUp()" oninput="goshowBos()" id="txtKey" name="value" type="text" value="" maxlength="40" autocomplete="off" style="height:25px; line-height:25px; float:left; padding-left:10px; width:255px; font-size:14px; clear:left; border:0px; background-color:#F0EFE2;" onfocus="this.parentNode.parentNode.style.backgroundColor='#FBFAF6';this.style='height:25px; line-height:25px; float:left; padding-left:10px; width:255px; font-size:14px; clear:left; border:0px; background-color:#FBFAF6;';document.getElementById('searchBtn').style.backgroundColor = '#FBFAF6';" onblur="this.parentNode.parentNode.style.backgroundColor='#F0EFE2';this.style='height:25px; line-height:25px; float:left; padding-left:10px; width:255px; font-size:14px; clear:left; border:0px; background-color:#F0EFE2;';document.getElementById('searchBtn').style.backgroundColor = '#F0EFE2';" />
+<input type="submit" id="searchBtn" style="float:right; width:23px; height:23px; clear:right; margin-top:2px; margin-right:4px;background-image:url(https://www.guwendao.net/img/sousuokuang.png); background-repeat:no-repeat; background-size:23px 23px; border:0px; cursor:pointer; background-color:#F0EFE2;" value="" />
+<input id="b" style="display:none;" type="text" />
+</form>
+</div>
+</div>
+<a href="/app/DefaultGwd.aspx" target="_blank" style="font-size:16px;color:#5D6146;"><img src="https://www.guwendao.net/img/wode/APP.png" alt="app" />APP</a>
+<a href="/user/wode.aspx" rel="nofollow" id="userLink" style="font-size:16px; color:#0F0F0F; display:inline-block;visibility:hidden;">
+<span style="border:1px solid #5D6146;width:22px;height:22px;border-radius:50%;display:inline-block;text-align:center;line-height:22px;background:#FBFAF6;margin-right:6px;margin-top:12px;vertical-align:middle;overflow:hidden;">
+<img id="userIcon" src="https://www.guwendao.net/img/wode/unlogin.png" alt="未登录" style="width:16px;height:16px;display:block;margin:0 auto;vertical-align:middle;border:none;padding-top:2px;" />
+</span>
+<span id="userText" style="vertical-align:middle;margin-top:12px;display:inline-block;">登录</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="main3">
+<div style="width:300px;margin-left:720px;">
+<div id="box"></div>
+</div>
+</div>
+</div>
+<div class="container" id="container">
+<div class="audio-player-container" id="audioplayercontainer">
+<div class="audio-player-controls">
+<button id="prevButton"><img src="/img/play/prevButton.png" alt="上一首" /></button>
+<button id="playPauseButton"><img src="/img/play/playPauseButton.png" alt="播放" /></button>
+<button id="nextButton"><img src="/img/play/nextButton.png" alt="下一首" /></button>
+<div class="progress-container">
+<div class="time-info">
+<div class="time-infoleft"><span class="timenamestr" id="nameStr"></span><span class="time-langsong" id="author"></span></div>
+<div class="time-inforhgit"><span class="time-start" id="currentTime">0:00</span> / <span class="time-end" id="duration">0:00</span><span class="time-langsong" id="langsongspan">(朗诵：<span id="langsongauthor"></span>)</span></div>
+</div>
+<div class="progressBackground" id="progressBackground"></div>
+<div class="progress" id="progress"></div>
+<div class="progressBall" id="progressBall"></div>
+</div>
+<div class="close-button" id="closeButton"><img src="/img/play/close.png" alt="关闭" /></div>
+<button id="downloadButton"><img src="/img/play/download.png" alt="下载" /></button>
+<button id="xunhuanButton"><img src="/img/play/listplay.png" id="currentModeIcon" alt="循环" /></button>
+<button id="beisuButton"><img src="/img/play/beisu.png" alt="倍速" /></button>
+<div class="listButton">
+<span class="payaaa">
+<button id="listButton"><img src="/img/play/list.png" alt="播放列表按钮" /></button>
+<span id="palynum">0</span>
+</span>
+<div class="playlist-container" id="playlistcontainer">
+<div class="playlist-header">
+播放列表 <span class="right-icons"><img src="/img/play/clear.png" class="icon-space" id="clear" alt="清空" /><span class="vertical-divider" style="margin-left:10px;margin-right:10px;"></span><img src="/img/play/playclose.png" class="icon-space" id="playclose" alt="关闭列表" /></span>
+</div>
+<div class="playlist-wrapper" id="playlistWrapper"><ul class="playlist" id="playlist"></ul></div>
+</div>
+</div>
+<div class="volume-control">
+<span id="volume"><img src="/img/play/volume.png" alt="音量" /></span>
+<input type="range" id="volumeControl" min="0" max="1" step="0.01" value="0.5" />
+</div>
+<div class="speed-controls" id="speedControls">
+<ul class="speed-options" id="speedOptions">
+<li data-value="0.25" class="list-item">0.25x</li>
+<li data-value="0.5" class="list-item">0.5x</li>
+<li data-value="0.75" class="list-item">0.75x</li>
+<li data-value="1" class="list-item selected">1.0x</li>
+<li data-value="1.25" class="list-item">1.25x</li>
+<li data-value="1.5" class="list-item">1.5x</li>
+<li data-value="2" class="list-item">2.0x</li>
+</ul>
+</div>
+<div class="play-mode" id="playModeControls">
+<ul class="play-options" id="playModeOptions">
+<li data-value="listLoop" class="list-item selected"><img src="/img/play/listplay.png" class="icon" alt="" />列表循环</li>
+<li data-value="random" class="list-item"><img src="/img/play/random.png" class="icon" alt="" />随机播放</li>
+<li data-value="singleLoop" class="list-item"><img src="/img/play/singpaly.png" class="icon" alt="" />单曲循环</li>
+<li data-value="single" class="list-item"><img src="/img/play/sing.png" class="icon" alt="" />单曲播放</li>
+</ul>
+</div>
+<audio id="audioPlayer" preload="none" style="display: none;">您的浏览器不支持 audio 元素。</audio>
+</div>
+</div>
+</div>
+<div class="ln-page">
+<div class="ln-card">
+<div class="ln-card-left">
+<img src="/user/img/slice-left.png" srcset="/user/img/slice-left@2x.png 2x" alt="" />
+</div>
+<div class="ln-card-right">
+<nav class="ln-tabs">
+<a class="ln-tab" href="/user/login.aspx?tab=app&amp;from=%2Fuser%2Fwode.aspx">APP扫码登录</a>
+<a class="ln-tab is-active" href="/user/login.aspx?tab=account&amp;from=%2Fuser%2Fwode.aspx">账号登录</a>
+<a class="ln-tab" href="/user/login.aspx?tab=wx&amp;from=%2Fuser%2Fwode.aspx">微信登录</a>
+</nav>
+<div class="ln-tab-panel is-active" id="panelAccount">
+<form class="ln-form" method="post" action="/user/login.aspx?tab=account&amp;from=%2Fuser%2Fwode.aspx" onsubmit="return lnTestForm()">
+<input name="__RequestVerificationToken" type="hidden" value="CfDJ8I0_R0SocjROovTu6TMF-dHIVhpHgtBvp9Wx-3bfrm6F1rRxwT_gIQsmDxFU7SgDRqZnmAhti_bL7FviTQoD_eChMWl6ZqUzLycFl2esg62tZrbgTBS984sNm9oEqkMqhkwEq17CJ92Z1Hq9HJA8FTc" />
+<input type="hidden" name="from" value="/user/wode.aspx" />
+<div class="ln-msg">提交失败，您输入的验证码有误！</div>
+<div class="ln-form-row">
+<label for="email">账号</label>
+<input type="text" class="ln-input" id="email" name="email" maxlength="50" placeholder="请输入邮箱/手机号" />
+</div>
+<div class="ln-form-row">
+<label for="pwd">密码</label>
+<input type="password" class="ln-input" id="pwd" name="pwd" maxlength="20" placeholder="请输入密码" />
+</div>
+<div class="ln-form-row ln-form-row-code">
+<label for="code">验证码</label>
+<div class="ln-code-wrap">
+<input type="text" class="ln-input ln-input-code" id="code" name="code" maxlength="4" placeholder="请输入验证码" />
+<img id="imgCode" class="ln-code-img" src="/RandCode.ashx?t=639294634115378368" width="120" height="52" alt="" onclick="lnRefreshCode()" />
+</div>
+</div>
+<button type="submit" class="ln-btn-submit" id="btnSubmit">登录</button>
+<div class="ln-form-foot">
+<span class="ln-link-reg">还没有账号，<a href="/user/register.aspx?from=%2Fuser%2Fwode.aspx"><em>马上注册</em></a></span>
+<a class="ln-link-forgot" href="/user/findpwd.aspx?from=%2Fuser%2Fwode.aspx">忘记密码？</a>
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+<script type="text/javascript">var lnTab='account';var lnPcStr='';var lnSceneId='';var lnFrom='/user/wode.aspx';</script>
+<div id="gushiwen.cn" class="main4" style="display:none;">
+© 2026 <a href="/">古诗文网</a> | <a href="/shiwens/">诗文</a> | <a href="/mingjus/">名句</a> | <a href="/guwen/">古籍</a> | <a href="/authors/">作者</a> | <a href="/zici/">字词</a> | <a id="jiucuo-link1" href="/jiucuo.aspx?u=纠错" target="_blank" rel="nofollow">纠错</a>
+</div>
+<div id="guwendao.net" class="main4">
+© 2026 <a href="/">古文岛</a> | <a href="/shiwens/">诗文</a> | <a href="/mingjus/">名句</a> | <a href="/guwen/">古籍</a> | <a href="/authors/">作者</a> | <a href="/zici/">字词</a> | <a id="jiucuo-link2" href="/jiucuo.aspx?u=纠错" target="_blank" rel="nofollow">纠错</a>
+</div>
+<script type="text/javascript">if (document.domain.indexOf('gushiwen.cn') >0) {document.getElementById('guwendao.net').style.display ="none";document.getElementById('gushiwen.cn').style.display ="block";}
+</script>
+<script type="text/javascript">(function () {function getCookie(name) {var parts =document.cookie ?document.cookie.split(";") :[];for (var i =0;i < parts.length;i++) {var item =parts[i].trim();if (item.indexOf(name + "=") ===0) {return decodeURIComponent(item.substring(name.length + 1));}
+}
+return null;}
+document.addEventListener("DOMContentLoaded",function () {var userIcon =document.getElementById("userIcon");var userText =document.getElementById("userText");var userLink =document.getElementById("userLink");if (!userIcon ||!userText ||!userLink) {return;}
+var iconBox =userIcon.parentElement;var loginUser =getCookie("gsw2017user");if (!loginUser) {userIcon.src ="/img/wode/unlogin.png";userIcon.alt ="未登录";userText.innerText ="登录";if (iconBox) {iconBox.style.border ="1px solid #5D6146";iconBox.style.background ="#FBFAF6";}
+} else {userIcon.src ="/img/wode/touxiang.png";userIcon.alt ="我的";userText.innerText ="我的";if (iconBox) {iconBox.style.border ="1px solid transparent";iconBox.style.background ="#C5C8CD";}
+}
+userLink.style.visibility ="visible";});})();</script>
+<script src="/js/play.js?time=260921" type="text/javascript"></script>
+<script src="/js/layui.js?time=260206" type="text/javascript"></script>
+<script src="/js/skin.js?time=261008" type="text/javascript"></script>
+<script src="/js/listenerPlay.js?time=261026" type="text/javascript"></script>
+</body>
+</html>
